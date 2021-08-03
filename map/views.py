@@ -1,23 +1,22 @@
 import folium
 from django.shortcuts import render
 import pandas as pd
-#from map_django_project.map_api.views import new_frame
+import json
 
-# choice_box=['Test_1', 'Test_2', 'Test_3', 'Test_4']
+with open("all_id_new.geojson", "r",  encoding='utf-8') as read_file:  # фиксит проблему с инкодингом русских слов
+     encod_geo_data = json.load(read_file) # (десериализует json в обьекты python)
 
 def show_map(request, pk):
 
-    m = folium.Map(location=[55.17, 51.00], tiles= "OpenStreetMap", name="Light Map",
-                   zoom_start=6)
+    m = folium.Map(location=[55.17, 51.00], tiles="OpenStreetMap", name="Light Map",
+                   zoom_start=7.5)
 
-    # csv_test_map = "csv_test_map_1.csv"  # присваеваем csv файлу имя
     csv_test_data = pd.read_csv("csv_test_map_1.csv")  # через pandas подгружаем возможность прочесть csv код
 
     choice = ['Test_1', 'Test_2', 'Test_3', 'Test_4']  # значения выбора
-    # choice_selected = st.selectbox("Select choice", choice)  # создание бокса выбора
 
     folium.Choropleth(
-        geo_data="all_id_new.geojson",
+        geo_data="all_id_new.geojson",   # можно поменять на encod_geo_data, если нужно будет работать с русским текстом
         name="choropleth",
         data=csv_test_data,
         columns=["id",choice[pk]],
@@ -28,8 +27,7 @@ def show_map(request, pk):
         # legend_name=choice_selected
     ).add_to(m)
 
-    # geojson1 =(open("all_id.geojson", "r", encoding="utf-8-sig")).read()
-    folium.features.GeoJson(data="all_id_new.geojson"
+    folium.features.GeoJson(data=encod_geo_data
                             , name="States", popup=folium.features.GeoJsonPopup(fields=["rname", "id"],
                                                                                 aliases=["region_name",
                                                                                          "region_id"])).add_to(m)
@@ -38,4 +36,5 @@ def show_map(request, pk):
 
     return render(request, 'map/map_render.html', context)
 
-print(new_frame)
+
+
