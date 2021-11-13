@@ -8,8 +8,9 @@ with open("all_id_new.geojson", "r",  encoding='utf-8') as read_file:  # фик�
 
 def show_map(request, pk):
 
-    m = folium.Map(location=[55.17, 51.00], tiles="OpenStreetMap", name="Light Map",
-                   zoom_start=7.5, dragging=True, height='100%')  # настройки отоброжения веб-карты
+    m = folium.Map(location=[55.17, 51.00], tiles="OpenStreetMap", name="Light Map", height='100%',
+                   zoom_start=7.5, zoom_control=False,
+               scrollWheelZoom=False, dragging=False,inertia=False)  # настройки отоброжения веб-карты
 
     csv_test_data = pd.read_csv("csv_test_map_3.csv")
     # через pandas подгружаем возможность прочесть тестовые значения
