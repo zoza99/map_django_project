@@ -4,13 +4,13 @@ import pandas as pd
 import json
 
 with open("all_id_new.geojson", "r",  encoding='utf-8') as read_file:  # фиксит проблему с инкодингом русских слов
-     encod_geo_data = json.load(read_file) # (десериализует json в обьекты python)
+     encod_geo_data = json.load(read_file) # (десериализует json в объекты python)
 
 def show_map(request, pk):
 
     m = folium.Map(location=[55.17, 51.00], tiles="OpenStreetMap", name="Light Map", height='100%',
                    zoom_start=7.5, zoom_control=False,
-               scrollWheelZoom=False, dragging=False,inertia=False)  # настройки отоброжения веб-карты
+               scrollWheelZoom=False, dragging=False,inertia=False)  # настройки отображения веб-карты
 
     csv_test_data = pd.read_csv("csv_test_map_3.csv")
     # через pandas подгружаем возможность прочесть тестовые значения
@@ -25,15 +25,15 @@ def show_map(request, pk):
         data=csv_test_data,  # подключение файла с тестовыми данными
         columns=["id",choice[pk]],  # прописываем внешний ключ
         key_on="feature.properties.id",  # прописываем первичный ключ
-        fill_color="YlOrRd",  # Вбираем цветовую градацию отоброжения изменений
+        wd="YlOrRd",  # Вбираем цветовую градацию отображения изменений
         fill_opacity=0.7,
         line_opacity=.1,
         # legend_name=choice_selected
     ).add_to(m)
 
     folium.features.GeoJson(data=encod_geo_data,  # Выбираем файл для работы с данными
-     name="States", popup=folium.features.GeoJsonPopup(fields=["rname", "id"],  # Выбираем данные для отброжения
-      aliases=["region_name", "region_id"])).add_to(m)  # Выбираем данные для отброжения
+     name="States", popup=folium.features.GeoJsonPopup(fields=["rname", "id"],  # Выбираем данные для отображения
+      aliases=["region_name", "region_id"])).add_to(m)  # Выбираем данные для отображения
     m = m._repr_html_()
     context = {'my_map': m,
                'period': period
