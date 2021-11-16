@@ -116,7 +116,7 @@
 
 1. Пример частично заполненного DataFrame:
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/373916f5-698f-4dcf-ae33-f2512d7d7120/Untitled.png)
+![Альтернативный текст](https://github.com/zoza99/map_django_project/blob/master/images_for_README/dataframe.png "Подсказка")
 
 > Хочется заметить что в примере отображен результат лишь одной итерации цикла, внутри которого мы собираем данные на разные промежутки прогнозирования состояния погодных условий, в последующих итерациях меняется объект карты (район татарстана), так продолжается до окончания объектов (их 45).
 > 
@@ -138,11 +138,11 @@ git clone https://github.com/zoza99/map_django_project.git
 
 1. Создаем и запускаем виртуальную среду с помощью следующего кода (не нужно если реализуем в PyCharm) :
 
-```jsx
-virtualenv env --no-site-packages
 
-source env/bin/activate
-```
+    virtualenv env --no-site-packages
+
+    source env/bin/activate
+
 
 1. Переходим в нашу директорию с помощью следующего кода(если этого не сделали):
 
