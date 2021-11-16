@@ -39,6 +39,7 @@ def show_map(request, pk):
                'period': period
                }
 
+
     return render(request, 'map/map_render.html', context)
 
 
