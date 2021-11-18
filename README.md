@@ -14,7 +14,7 @@
 
 Пример работы веб-интерфейса:
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1e8aac70-62e6-4b44-b9cd-ea78cbe415f8/Untitled.png)
+![Untitled](https://github.com/zoza99/map_django_project/blob/master/images_for_README/map.png)
 
 Можно заметь что визуализация прогнозирования происходит через цветовую шкалу, где зеленый-допустимое значение, оранжевый-требует внимания, красный - критическую ситуация. Тестовые значения 0, 1, 2 соответственно. Также на рисунке отображено меню выбора периода прогнозирование и описание объекта карты "Высокогорский район".
 
@@ -35,7 +35,7 @@
 
 ## Структура проекта:
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/cac0dae5-f742-4e6b-a448-320bc82f8542/Untitled.png)
+![Untitled](https://github.com/zoza99/map_django_project/blob/master/images_for_README/scheme.png)
 
 ## Обзор на проект.
 
@@ -111,7 +111,7 @@
 
 5. Пример частично заполненного DataFrame:
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/373916f5-698f-4dcf-ae33-f2512d7d7120/Untitled.png)
+![Untitled](https://github.com/zoza99/map_django_project/blob/master/images_for_README/dataframe.png)
 
 Хочется заметить что в примере отображен результат лишь одной итерации цикла, внутри которого мы собираем данные на разные промежутки прогнозирования состояния погодных условий, в последующих итерациях меняется объект карты (район татарстана), так продолжается до окончания объектов (их 45).
 
