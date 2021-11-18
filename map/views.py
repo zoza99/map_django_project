@@ -4,7 +4,7 @@ import pandas as pd
 import json
 
 with open("all_id_new.geojson", "r",  encoding='utf-8') as read_file:  # фиксит проблему с инкодингом русских слов
-     encod_geo_data = json.load(read_file) # (десериализует json в объекты python)
+     encod_geo_data = json.load(read_file)  # (десериализует json в объекты python)
 
 def show_map(request, pk):
 
@@ -28,7 +28,6 @@ def show_map(request, pk):
         wd="YlOrRd",  # Вбираем цветовую градацию отображения изменений
         fill_opacity=0.7,
         line_opacity=.1,
-        # legend_name=choice_selected
     ).add_to(m)
 
     folium.features.GeoJson(data=encod_geo_data,  # Выбираем файл для работы с данными

@@ -4,7 +4,7 @@ import urllib.request, urllib.parse
 import pandas as pd
 from statistics import mean
 
-# настройки отоброжения датафрейма в консоли
+# настройки отображения датафрейма в консоли
 pd.set_option('display.max_rows', None)
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_colwidth', None)
@@ -16,12 +16,6 @@ data = {'region_name': [], 'region_id': [], 'period': [], 'temp': [], 'pressure'
         'wind_speed': [], 'wind_gust': [], 'rain': [], 'snow': [], 'thunder': []}
 frame = pd.DataFrame(data, copy=False)
 
-# create_data = Region_info(region_name=csv_test1_data['rname'][0],  region_lat=csv_test1_data['lat'][0], region_lon=csv_test1_data['lon'][0])
-# create_data.save()
-
-# for info in range(45):
-#     mo.Region_info(region_name=csv_test1_data['rname'][info], region_lat=csv_test1_data['lat'][info], region_lon=csv_test1_data['lon'][info]).save()
-
 for i in range(45):  # цикл по индексам csv файла (45 индексов с 0 до 44)
     API_key = "26fb96ce6ef4eb919fad5f007b318f7a"
     base_url = "https://api.openweathermap.org/data/2.5/onecall?"
@@ -31,9 +25,9 @@ for i in range(45):  # цикл по индексам csv файла (45 инд�
     Final_url = base_url + "lat=" + lat + "&lon=" + lon + "&appid=" + API_key + "&exclude=minutely,alerts" + "&units=metric"
 
     data = urllib.request.urlopen(Final_url).read()  # Считываем json
-    js_obj = json.loads(data)  # десериализует str json в обьекты python
+    js_obj = json.loads(data)  # десериализует str json в объекты python
 
-    # начинаем парсить
+    # начинаем парсить данный с js_obj
 
     # нынешнее время
     time_current = js_obj['current']  # нынешнее данные
@@ -77,8 +71,8 @@ for i in range(45):  # цикл по индексам csv файла (45 инд�
              "%Y-%m-%d %H:%M:%S").timetuple()))  # используем str форму для перевода в Unix
 
     # через 3 ч
-    time_h = js_obj['hourly']  # погодные уловия на промежутки в час
-    time_hourly3 = time_h[3]  # погодные уловия через 3 ч
+    time_h = js_obj['hourly']  # погодные условия на промежутки в час
+    time_hourly3 = time_h[3]  # погодные условия через 3 ч
     time_hourly3_dt = time_hourly3['dt']  # время в Unix
     time_hourly3_temp = time_hourly3['temp']  # температура градусы
     time_hourly3_pressure = time_hourly3['pressure']  # атм давление в миллибарах
@@ -112,7 +106,7 @@ for i in range(45):  # цикл по индексам csv файла (45 инд�
         time_hourly3_weather_bool_storm = 0
 
     # через 12 ч
-    time_hourly12 = time_h[12]  # погодные уловия через 12 ч
+    time_hourly12 = time_h[12]  # погодные условия через 12 ч
     time_hourly12_dt = time_hourly12['dt']  # время в Unix
     time_hourly12_temp = time_hourly12['temp']  # температура градусы
     time_hourly12_pressure = time_hourly12['pressure']  # атм давление в миллибарах
@@ -146,7 +140,7 @@ for i in range(45):  # цикл по индексам csv файла (45 инд�
         time_hourly12_weather_bool_storm = 0
 
     # через 1 день
-    time_daily = js_obj['daily']  # погодные уловия с промежутком в дни
+    time_daily = js_obj['daily']  # погодные условия с промежутком в дни
     time_daily1 = time_daily[1]
     time_daily1_dt = time_daily1['dt']  # Время Unix
     time_daily1_temp = time_daily1['temp']  # значения температур а градусах
@@ -227,7 +221,7 @@ for i in range(45):  # цикл по индексам csv файла (45 инд�
 
     frame = frame.append(now_row, ignore_index=True)
 
-    # Вносим прогнозируеммые данные в data frame(3 часа)
+    # Вносим прогнозируемые данные в data frame(3 часа)
     h3_row = {'region_name': csv_test1_data["rname"][i], 'region_id': csv_test1_data["id"][i],
                'period': '3h', 'temp': time_hourly3_temp, 'pressure': time_hourly3_pressure,
                'humidity': time_hourly3_humidity,
@@ -236,7 +230,7 @@ for i in range(45):  # цикл по индексам csv файла (45 инд�
 
     frame = frame.append(h3_row, ignore_index=True)
 
-    # Вносим прогнозируеммые данные в data frame(12 часов)
+    # Вносим прогнозируемые данные в data frame(12 часов)
     h12_row = {'region_name': csv_test1_data["rname"][i], 'region_id': csv_test1_data["id"][i],
               'period': '12h', 'temp': time_hourly12_temp, 'pressure': time_hourly12_pressure,
               'humidity': time_hourly12_humidity,
@@ -245,7 +239,7 @@ for i in range(45):  # цикл по индексам csv файла (45 инд�
 
     frame = frame.append(h12_row, ignore_index=True)
 
-    # Вносим прогнозируеммые данные в data frame(1 день)
+    # Вносим прогнозируемые данные в data frame(1 день)
     d1_row = {'region_name': csv_test1_data["rname"][i], 'region_id': csv_test1_data["id"][i],
                'period': '1d', 'temp': time_daily1_temp_avg, 'pressure': time_daily1_pressure,
                'humidity': time_daily1_humidity,
@@ -254,7 +248,7 @@ for i in range(45):  # цикл по индексам csv файла (45 инд�
 
     frame = frame.append(d1_row, ignore_index=True)
 
-    # Вносим прогнозируеммые данные в data frame(3 дня)
+    # Вносим прогнозируемые данные в data frame(3 дня)
     d3_row = {'region_name': csv_test1_data["rname"][i], 'region_id': csv_test1_data["id"][i],
               'period': '3d', 'temp': time_daily3_temp_avg, 'pressure': time_daily3_pressure,
               'humidity': time_daily3_humidity,
@@ -264,24 +258,5 @@ for i in range(45):  # цикл по индексам csv файла (45 инд�
     frame = frame.append(d3_row, ignore_index=True)
 
 
-
-
-    # print(type(js_obj))
-    # print(js_obj)
-    # print(time_current_dt)
-    # print(value_rep_unix)
-    # print(time_current_temp)
-    # print(csv_test_data.head())
-    # print(lat)
-    # print(lon)
-    # print(time_current_wind_gust)
-    # print(time_current_wind_speed)
-    # print(frame)
-    # print(time_daily1_temp_min)
-    # print(time_daily1_temp_max)
-    # print(time_daily1_temp_avg)
-
-new_frame = frame.copy(deep=True)
-#new_frame_csv =new_frame.to_csv('api_test.csv', header=True)
-#print(new_frame)
+new_frame = frame.copy(deep=True)  # Создаем копию dataframe
 print(frame)
