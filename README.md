@@ -129,30 +129,31 @@
 
 2. Создаем и запускаем виртуальную среду с помощью следующего кода (не нужно если реализуем в PyCharm) :
    
-
+```
     virtualenv env --no-site-packages
+    
     source env/bin/activate
-
+```
 3. Переходим в нашу директорию с помощью следующего кода(если этого не сделали):
 
-
+```
     cd map_django_project
-
+```
 4. Устанавливаем зависимости проекта:
 
-   
+```   
     pip install -r requirements.txt
-   
+```   
 5. Применяем миграции:
 
-
+```
     python manage.py migrate
-
+```
 6. Запускаем сервер разработки:
 
-
+```
     python manage.py runserver
-
+```
 7. Далее проходим по ссылке: [http:// localhost:8000:/maps/0/](http://localhost:8000:/maps/0/)
 
 ## Инструкция по запуску:
