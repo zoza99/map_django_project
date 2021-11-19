@@ -25,7 +25,7 @@ def show_map(request, pk):
         data=csv_test_data,  # подключение файла с тестовыми данными
         columns=["id",choice[pk]],  # прописываем внешний ключ
         key_on="feature.properties.id",  # прописываем первичный ключ
-        wd="YlOrRd",  # Вбираем цветовую градацию отображения изменений
+       fill_color="YlOrRd",  # Вбираем цветовую градацию отображения изменений
         fill_opacity=0.7,
         line_opacity=.1,
     ).add_to(m)
